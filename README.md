@@ -7,17 +7,20 @@ targets.
 ## Install
 
 - **Arduino IDE / Arduino CLI Library Manager**: Sketch -> Include Library -> Manage Libraries ->
-  search `ErdiLRF` -> Install. (Submitted to
-  [arduino/library-registry](https://github.com/arduino/library-registry); until the PR is
-  merged and the hourly indexer picks up the `v0.1.0` tag, install from Git below.)
+  search `ErdiLRF` -> Install. The
+  [registry submission](https://github.com/arduino/library-registry/pull/9133)
+  has been accepted. If your local index is out of date, refresh it or use Git below.
 - **From Git**: `arduino-cli lib install --git-url https://github.com/yu911517778-a11y/ErdiLRF`
   or clone/copy this repository into your sketchbook's `libraries/` folder.
 - **PlatformIO**: add to `platformio.ini`:
   ```ini
   lib_deps =
-      https://github.com/yu911517778-a11y/ErdiLRF.git
+      erdi-tech/ErdiLRF@0.1.0
   ```
-  (or, once published, `erdi-tech/ErdiLRF` from the PlatformIO Registry).
+  Version 0.1.0 is public in the
+  [PlatformIO Registry](https://registry.platformio.org/libraries/erdi-tech/ErdiLRF).
+  Git installation remains available with
+  `https://github.com/yu911517778-a11y/ErdiLRF.git`.
 
 ## Supported models
 
@@ -52,9 +55,14 @@ A step-by-step wiring and first-reading walkthrough is here:
 
 ## Also available
 
-- Python driver: `pip install erdilrf` -- see the
-  [erdi-lrf-drivers](https://github.com/yu911517778-a11y/erdi-lrf-drivers) mono-repo.
-- ROS 2 node: same mono-repo, `ros2/erdi_lrf_ros`.
+- Python driver: install the published GitHub release wheel:
+  ```bash
+  pip install https://github.com/yu911517778-a11y/erdi-lrf-drivers/releases/download/v0.1.0/erdi_lrf-0.1.0-py3-none-any.whl
+  ```
+  See the [Python installation guide](https://github.com/yu911517778-a11y/erdi-lrf-drivers#install-in-one-command).
+- ROS 2 node:
+  [`ros2/erdi_lrf_ros2`](https://github.com/yu911517778-a11y/erdi-lrf-drivers/tree/main/ros2/erdi_lrf_ros2)
+  in the same mono-repo. Its documented validation does not include a live ROS 2 runtime test.
 
 This repository is a maintained split of `arduino/ErdiLRF` from that mono-repo, published
 standalone so it can be registered with the Arduino Library Manager and the PlatformIO
