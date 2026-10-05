@@ -1,8 +1,9 @@
 # ErdiLRF
 
 Arduino driver for [ERDI](https://erdilrf.com) 905 nm laser rangefinder modules over UART.
-Works with `HardwareSerial` or `SoftwareSerial` on AVR, SAMD, ESP32, and other Arduino-core
-targets.
+The API accepts an Arduino `Stream` transport. Host UART capabilities and the delivered
+module interface must be checked for the selected configuration; a library entry is not
+a hardware-compatibility or electrical-level guarantee.
 
 ## Install
 
@@ -15,27 +16,36 @@ targets.
 - **PlatformIO**: add to `platformio.ini`:
   ```ini
   lib_deps =
-      erdi-tech/ErdiLRF@0.1.0
+      erdi-tech/ErdiLRF
   ```
-  Version 0.1.0 is public in the
-  [PlatformIO Registry](https://registry.platformio.org/libraries/erdi-tech/ErdiLRF).
+  See the [PlatformIO Registry](https://registry.platformio.org/libraries/erdi-tech/ErdiLRF)
+  for published versions.
   Git installation remains available with
   `https://github.com/yu911517778-a11y/ErdiLRF.git`.
 
-## Supported models
+## Model identifiers and validation scope
 
-**Family A** -- 8-byte `55 AA` command/response protocol, 115200 bps, raw counts x10:
-`LR1000E2`, `LR1000E4`, `LR1200E2`, `LR1200E4`, `LR1500E2`, `LR1500E4`, `LR2000E2`, `LR2000E4`,
-`LRF1200A1`, `LRF3000A1`, `SPD1200N0`, `SPD1200N2`, `SPD1200N4`, `SPD1200D03`.
+The library source contains these model identifiers:
 
-**Family B** -- free-running `5C` data-frame protocol, 460800 bps:
-`LRF50H`, `LRF100H`, `LRF200H`, `LRF300H`, `LRF600H`, `LRF1500H`, `LRF22VB`, `LRF50VB`.
+`LR1000E2`, `LR1000E4`, `LR1200E2`, `LR1200E4`, `LR1500E2`, `LR1500E4`,
+`LR2000E2`, `LR2000E4`, `LRF1200A1`, `LRF3000A1`, `SPD1200N0`, `SPD1200N2`,
+`SPD1200N4`, `SPD1200D03`, `LRF50H`, `LRF100H`, `LRF200H`, `LRF300H`,
+`LRF600H`, `LRF1500H`, `LRF22VB`, `LRF50VB`.
 
-Per-model measurement units are respected in the driver (the `VB` series reports millimetres,
-the `H` series centimetres). Full model datasheets: <https://erdilrf.com/models/>.
+Select the exact model and manual revision before interpreting a reading. A common frame
+header does not establish a common distance unit, baud rate, supply, signal voltage,
+checksum interpretation or safety classification. Check the delivered unit's configuration
+and interface before wiring; a supply-voltage value is not a TX/RX logic-level specification.
 
-`SPD1200D03` is deliberately excluded from automatic baud selection -- see the note in
-[`examples/BasicMeasure`](examples/BasicMeasure/BasicMeasure.ino).
+`SPD1200D03` has conflicting baud-rate statements in its source manual. The library does
+not choose an automatic baud for it; confirm the delivered setting. Other documented
+source discrepancies remain unresolved, including the LRF50VB command-table/checksum
+mismatch and the LRF1500H checksum/sentinel examples. Do not treat this documentation
+update as resolving those issues or validating every model against hardware.
+
+For model documents and configuration questions, use the
+[model catalogue](https://erdilrf.com/models/) and
+[product enquiry form](https://erdilrf.com/contact/).
 
 ## Usage
 
@@ -66,14 +76,18 @@ A step-by-step wiring and first-reading walkthrough is here:
 
 This repository is a maintained split of `arduino/ErdiLRF` from that mono-repo, published
 standalone so it can be registered with the Arduino Library Manager and the PlatformIO
-Registry (both require a dedicated, tag-releasing repository).
+Registry. Arduino Library Manager tracks repository tags; PlatformIO packages are
+published separately.
 
 ## License
 
 MIT -- see [LICENSE](LICENSE).
 
----
+## Contact
 
-ERDI TECH LTD -- 905 nm eye-safe laser rangefinder modules (IEC 60825-1 Class 1)
-Email: tommy@erdimail.com  WhatsApp: +86 133 0819 5790 (https://wa.me/8613308195790)  Tel: +86-28-81076698
-Web: https://erdilrf.com  Room 2812, 28/F, Building 3, No. 88 Jiaozi Avenue, Chengdu Hi-Tech Zone, Sichuan, China
+ERDI TECH LTD · 905 nm laser rangefinder modules · tommy@erdimail.com · WhatsApp +86 133 0819 5790 · erdilrf.com
+
+- [Email ERDI](mailto:tommy@erdimail.com)
+- [WhatsApp](https://wa.me/8613308195790)
+- [Product enquiries](https://erdilrf.com/contact/)
+- [Website](https://erdilrf.com/)
