@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="360" viewBox="0 0 420 360" role="img" aria-labelledby="title desc">
+<title id="title">UART integration workflow</title><desc id="desc">Select the exact model, check the delivered interface, choose a driver, then check the message. This is a software workflow, not a wiring diagram or a hardware test.</desc>
+<rect width="420" height="360" fill="#F6F5EE"/>
+<text x="24" y="33" font-family="system-ui,Segoe UI,sans-serif" font-size="18" fill="#173F31">UART integration workflow</text>
+<path d="M42 75 V282" stroke="#173F31" stroke-width="2"/>
+<g fill="#C3EF6A" stroke="#173F31" stroke-width="2"><circle cx="42" cy="75" r="16"/><circle cx="42" cy="144" r="16"/><circle cx="42" cy="213" r="16"/><circle cx="42" cy="282" r="16"/></g>
+<g fill="#173F31" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="14"><text x="42" y="80">1</text><text x="42" y="149">2</text><text x="42" y="218">3</text><text x="42" y="287">4</text></g>
+<g fill="#173F31" font-family="system-ui,Segoe UI,sans-serif" font-size="20"><text x="77" y="73">Exact model</text><text x="77" y="142">Delivered interface</text><text x="77" y="211">Driver choice</text><text x="77" y="280">Message checks</text></g>
+<g fill="#51665B" font-family="system-ui,Segoe UI,sans-serif" font-size="15"><text x="77" y="96">Read the manual revision</text><text x="77" y="165">Supply · signal level · UART</text><text x="77" y="234">Python · Arduino · ROS 2</text><text x="77" y="303">Status · checksum · units</text></g>
+<text x="24" y="342" fill="#51665B" font-family="system-ui,Segoe UI,sans-serif" font-size="14">Software workflow. Keep source gaps visible.</text>
+</svg>

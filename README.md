@@ -1,9 +1,25 @@
-# ErdiLRF
+# ErdiLRF — Arduino UART driver
 
 Arduino driver for [ERDI](https://erdilrf.com) 905 nm laser rangefinder modules over UART.
 The API accepts an Arduino `Stream` transport. Host UART capabilities and the delivered
 module interface must be checked for the selected configuration; a library entry is not
 a hardware-compatibility or electrical-level guarantee.
+
+[Install](#install) · [First reading](#first-reading) · [Examples](#usage) · [Model scope](#model-identifiers-and-validation-scope)
+
+![Integration workflow: select the exact model, confirm the interface, choose a driver, validate the result.](docs/integration-flow.svg)
+
+## First reading
+
+1. Confirm the exact model, manual revision, delivered UART interface, supply and
+   signal levels before wiring.
+2. Install `ErdiLRF`, then open [BasicMeasure](examples/BasicMeasure/BasicMeasure.ino).
+   Select `ERDI_TARGET_MODEL` and configure the host UART for your board.
+3. Read the status and distance output together. Keep unresolved model-specific
+   limits visible; an example sketch does not prove hardware compatibility.
+
+For a streaming module, use [ContinuousStream](examples/ContinuousStream/ContinuousStream.ino)
+and read the selected model's protocol notes first.
 
 ## Install
 
@@ -11,7 +27,7 @@ a hardware-compatibility or electrical-level guarantee.
   search `ErdiLRF` -> Install. The
   [registry submission](https://github.com/arduino/library-registry/pull/9133)
   has been accepted. If your local index is out of date, refresh it or use Git below.
-- **From Git**: `arduino-cli lib install --git-url https://github.com/yu911517778-a11y/ErdiLRF`
+- **From Git**: `arduino-cli lib install --git-url https://github.com/ErdiTech/ErdiLRF`
   or clone/copy this repository into your sketchbook's `libraries/` folder.
 - **PlatformIO**: add to `platformio.ini`:
   ```ini
@@ -21,7 +37,7 @@ a hardware-compatibility or electrical-level guarantee.
   See the [PlatformIO Registry](https://registry.platformio.org/libraries/erdi-tech/ErdiLRF)
   for published versions.
   Git installation remains available with
-  `https://github.com/yu911517778-a11y/ErdiLRF.git`.
+  `https://github.com/ErdiTech/ErdiLRF.git`.
 
 ## Model identifiers and validation scope
 
@@ -67,11 +83,11 @@ A step-by-step wiring and first-reading walkthrough is here:
 
 - Python driver: install the published GitHub release wheel:
   ```bash
-  pip install https://github.com/yu911517778-a11y/erdi-lrf-drivers/releases/download/v0.1.0/erdi_lrf-0.1.0-py3-none-any.whl
+  pip install https://github.com/ErdiTech/erdi-lrf-drivers/releases/download/v0.1.0/erdi_lrf-0.1.0-py3-none-any.whl
   ```
-  See the [Python installation guide](https://github.com/yu911517778-a11y/erdi-lrf-drivers#install-in-one-command).
+  See the [Python installation guide](https://github.com/ErdiTech/erdi-lrf-drivers#install-in-one-command).
 - ROS 2 node:
-  [`ros2/erdi_lrf_ros2`](https://github.com/yu911517778-a11y/erdi-lrf-drivers/tree/main/ros2/erdi_lrf_ros2)
+  [`ros2/erdi_lrf_ros2`](https://github.com/ErdiTech/erdi-lrf-drivers/tree/main/ros2/erdi_lrf_ros2)
   in the same mono-repo. Its documented validation does not include a live ROS 2 runtime test.
 
 This repository is a maintained split of `arduino/ErdiLRF` from that mono-repo, published
