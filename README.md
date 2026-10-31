@@ -1,9 +1,13 @@
 # ErdiLRF — Arduino UART driver
 
-Arduino driver for [ERDI](https://erdilrf.com) 905 nm laser rangefinder modules over UART.
-The API accepts an Arduino `Stream` transport. Host UART capabilities and the delivered
-module interface must be checked for the selected configuration; a library entry is not
-a hardware-compatibility or electrical-level guarantee.
+Arduino and ESP32 library for 22 [ERDI](https://erdilrf.com/?utm_source=github&utm_medium=readme&utm_campaign=erdilrf-arduino)
+905 nm laser rangefinder modules over UART (LR1000E-LR2000E, LRF1200A1, LRF3000A1,
+SPD1200N, LRF50H-LRF1500H, LRF22VB, LRF50VB). It works with any Arduino `Stream`
+(`HardwareSerial`, `SoftwareSerial`, ESP32 `Serial1`/`Serial2`). Model pages and
+manuals: [erdilrf.com/models](https://erdilrf.com/models/?utm_source=github&utm_medium=readme&utm_campaign=erdilrf-arduino).
+Host UART capabilities and the delivered module interface must be checked for the
+selected configuration; a library entry is not a hardware-compatibility or
+electrical-level guarantee.
 
 [Install](#install) · [First reading](#first-reading) · [Examples](#usage) · [Model scope](#model-identifiers-and-validation-scope)
 
@@ -20,6 +24,22 @@ a hardware-compatibility or electrical-level guarantee.
 
 For a streaming module, use [ContinuousStream](examples/ContinuousStream/ContinuousStream.ino)
 and read the selected model's protocol notes first.
+
+## Wiring
+
+```
+ Module  TX ----> RX  Arduino / ESP32 UART
+ Module  RX <---- TX  Arduino / ESP32 UART
+ Module  GND ---- GND (one common ground)
+ Module  VCC <--- its own regulator, per the model's manual
+```
+
+Cross TX and RX and share ground. Check the module's TX logic level against the host
+before connecting (supply voltage is not the UART voltage; use a level shifter when
+they differ). Pin order is model-specific: use the model page and manual. ESP32 example:
+`Serial1.begin(erdiDefaultBaud(ERDI_LRF3000A1), SERIAL_8N1, RX_PIN, TX_PIN);` then
+`ErdiLRF lrf(Serial1, ERDI_LRF3000A1);`. Family-B modules (460800 baud) need a hardware
+UART; `SoftwareSerial` cannot reach that rate.
 
 ## Install
 
@@ -60,8 +80,8 @@ mismatch and the LRF1500H checksum/sentinel examples. Do not treat this document
 update as resolving those issues or validating every model against hardware.
 
 For model documents and configuration questions, use the
-[model catalogue](https://erdilrf.com/models/) and
-[product enquiry form](https://erdilrf.com/contact/).
+[model catalogue](https://erdilrf.com/models/?utm_source=github&utm_medium=readme&utm_campaign=erdilrf-arduino) and
+[product enquiry form](https://erdilrf.com/contact/?utm_source=github&utm_medium=readme&utm_campaign=erdilrf-arduino).
 
 ## Usage
 
