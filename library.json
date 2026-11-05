@@ -5,7 +5,7 @@
   "keywords": ["sensor", "lidar", "rangefinder", "laser", "distance", "uart", "erdi"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yu911517778-a11y/ErdiLRF.git"
+    "url": "https://github.com/ErdiTech/ErdiLRF.git"
   },
   "authors": [
     {

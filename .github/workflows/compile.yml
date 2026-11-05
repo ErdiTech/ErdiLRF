@@ -1,0 +1,14 @@
+name: compile-examples
+on: [push, pull_request]
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: arduino:avr:uno
+          libraries: |
+            - source-path: ./
+          sketch-paths: |
+            - examples/BasicMeasure
