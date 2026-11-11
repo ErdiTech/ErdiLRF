@@ -106,9 +106,7 @@ A step-by-step wiring and first-reading walkthrough is here:
   pip install https://github.com/ErdiTech/erdi-lrf-drivers/releases/download/v0.1.0/erdi_lrf-0.1.0-py3-none-any.whl
   ```
   See the [Python installation guide](https://github.com/ErdiTech/erdi-lrf-drivers#install-in-one-command).
-- ROS 2 node:
-  [`ros2/erdi_lrf_ros2`](https://github.com/ErdiTech/erdi-lrf-drivers/tree/main/ros2/erdi_lrf_ros2)
-  in the same mono-repo. Its documented validation does not include a live ROS 2 runtime test.
+- ROS 2 node: [`erdi_lrf_driver`](https://github.com/ErdiTech/erdi_lrf_driver) (builds and tests on ROS 2 Jazzy and Humble in CI).
 
 This repository is a maintained split of `arduino/ErdiLRF` from that mono-repo, published
 standalone so it can be registered with the Arduino Library Manager and the PlatformIO
