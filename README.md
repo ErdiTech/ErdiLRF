@@ -113,6 +113,17 @@ standalone so it can be registered with the Arduino Library Manager and the Plat
 Registry. Arduino Library Manager tracks repository tags; PlatformIO packages are
 published separately.
 
+## Support
+
+If this library saves you time, a tip is appreciated (send the matching coin on the matching network only):
+
+| Network | Address |
+|---|---|
+| USDT (TRC20) | `TNGdTwE6opH6rmUyoG1JUR7FSyEb4k273R` |
+| USDT (ERC20 / BEP20 / Polygon), ETH (Ethereum / Arbitrum / Base) | `0x59c43144a862b351fa1086ae842d1327c9d91613` |
+| BTC | `1RS6tWXHregLfEsiPzVUCUBuhgDg5uTSV` |
+| USDT (Solana) | `HZguEXfTtLChNdJTxAYCbcGscaqikz8JYrEpUhEyeVd9` |
+
 ## License
 
 MIT -- see [LICENSE](LICENSE).
