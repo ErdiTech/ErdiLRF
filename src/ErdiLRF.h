@@ -21,7 +21,7 @@
   Every constant here is transcribed from the model's own ERDI manual.
 
   Hardware: https://erdilrf.com/models/
-  License:  MIT - Copyright (c) 2026 ERDI Technology (Chengdu)
+  License:  MIT - Copyright (c) 2026 ERDI TECH LTD
 */
 
 #ifndef ERDI_LRF_H

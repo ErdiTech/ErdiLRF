@@ -1,7 +1,7 @@
 /*
   ErdiLRF.cpp - see ErdiLRF.h for the protocol summary and the source policy.
 
-  MIT - Copyright (c) 2026 ERDI Technology (Chengdu)
+  MIT - Copyright (c) 2026 ERDI TECH LTD
 */
 
 #include "ErdiLRF.h"
