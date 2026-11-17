@@ -1,8 +1,8 @@
 # ErdiLRF — Arduino UART driver
 
-Arduino and ESP32 library for 22 [ERDI](https://erdilrf.com/?utm_source=github&utm_medium=readme&utm_campaign=erdilrf-arduino)
+Arduino and ESP32 library for 24 [ERDI](https://erdilrf.com/?utm_source=github&utm_medium=readme&utm_campaign=erdilrf-arduino)
 905 nm laser rangefinder modules over UART (LR1000E-LR2000E, LRF1200A1, LRF3000A1,
-SPD1200N, LRF50H-LRF1500H, LRF22VB, LRF50VB). It works with any Arduino `Stream`
+SPD1200N, SPD1200S2G, LRF50H-LRF1500H, LRF10VB, LRF22VB, LRF50VB). It works with any Arduino `Stream`
 (`HardwareSerial`, `SoftwareSerial`, ESP32 `Serial1`/`Serial2`). Model pages and
 manuals: [erdilrf.com/models](https://erdilrf.com/models/?utm_source=github&utm_medium=readme&utm_campaign=erdilrf-arduino).
 Host UART capabilities and the delivered module interface must be checked for the
@@ -65,8 +65,8 @@ The library source contains these model identifiers:
 
 `LR1000E2`, `LR1000E4`, `LR1200E2`, `LR1200E4`, `LR1500E2`, `LR1500E4`,
 `LR2000E2`, `LR2000E4`, `LRF1200A1`, `LRF3000A1`, `SPD1200N0`, `SPD1200N2`,
-`SPD1200N4`, `SPD1200D03`, `LRF50H`, `LRF100H`, `LRF200H`, `LRF300H`,
-`LRF600H`, `LRF1500H`, `LRF22VB`, `LRF50VB`.
+`SPD1200N4`, `SPD1200D03`, `SPD1200S2G`, `LRF50H`, `LRF100H`, `LRF200H`, `LRF300H`,
+`LRF600H`, `LRF1500H`, `LRF22VB`, `LRF50VB`, `LRF10VB`.
 
 Select the exact model and manual revision before interpreting a reading. A common frame
 header does not establish a common distance unit, baud rate, supply, signal voltage,

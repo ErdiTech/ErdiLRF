@@ -46,6 +46,10 @@ static const ErdiModelInfo kModels[ERDI_MODEL_COUNT] ERDI_PROGMEM = {
      rate until the delivered unit configuration is confirmed."  It also prints
      no distance-scaling statement.  Both gaps are represented, not guessed. */
   { "SPD1200D03", ERDI_FAMILY_A,      0UL, 8, 2, ERDI_UNIT_UNDOCUMENTED,     0UL,    20,  120000UL, 0, 0 },
+  /* SPD1200S2G: 8-byte distance protocol only (single 0x88 / continuous 0x89 / stop 0x8E).  Its manual
+     withholds the 12-byte angle packets until field scale and checksum overflow are confirmed, and prints no
+     angle (0x8A) or LD constant-ON row; the lower-8-bit checksum is the family-A convention, unconfirmed here. */
+  { "SPD1200S2G", ERDI_FAMILY_A, 115200UL, 8, 2, ERDI_UNIT_DECIMETRE,        0UL,    10,  120000UL, 0, 0 },
 
   { "LRF50H",     ERDI_FAMILY_B, 460800UL, 4, 2, ERDI_UNIT_CENTIMETRE,   65535UL,     5,    5000UL, 1, 0 },
   { "LRF100H",    ERDI_FAMILY_B, 460800UL, 4, 2, ERDI_UNIT_CENTIMETRE,   65535UL,     5,   10000UL, 0, 0 },
@@ -56,6 +60,9 @@ static const ErdiModelInfo kModels[ERDI_MODEL_COUNT] ERDI_PROGMEM = {
   { "LRF1500H",   ERDI_FAMILY_B, 460800UL, 5, 3, ERDI_UNIT_CENTIMETRE, 16777215UL,    5,  150000UL, 0, 0 },
   { "LRF22VB",    ERDI_FAMILY_B, 460800UL, 4, 2, ERDI_UNIT_MILLIMETRE,   20000UL,     5,    2000UL, 1, 0 },
   { "LRF50VB",    ERDI_FAMILY_B, 460800UL, 4, 2, ERDI_UNIT_MILLIMETRE,   50000UL,     5,    5000UL, 1, 0 },
+  /* LRF10VB (940 nm), Specification V3.0: 4-byte 5C frame, millimetres, out of range 65535,
+     0.05-9 m.  Only 5A 0A start/stop ranging is documented; the manual prints no baud frame. */
+  { "LRF10VB",    ERDI_FAMILY_B, 460800UL, 4, 2, ERDI_UNIT_MILLIMETRE,   65535UL,     5,     900UL, 1, 0 },
 };
 
 /* Family B baud rates: "Any other baud rate is not available". */
@@ -402,7 +409,8 @@ ErdiStatus ErdiLRF::measureAngle(ErdiMeasurement *out) {
     return ERDI_ERR_UNSUPPORTED;
   }
   /* SPD1200D03's transcription has no angle row; family B has no angle at all. */
-  if (_info.family != ERDI_FAMILY_A || _model == ERDI_SPD1200D03) {
+  if (_info.family != ERDI_FAMILY_A || _model == ERDI_SPD1200D03 ||
+      _model == ERDI_SPD1200S2G) {
     return ERDI_ERR_UNSUPPORTED;
   }
   memset(out, 0, sizeof(*out));
@@ -420,7 +428,7 @@ ErdiStatus ErdiLRF::measureAngle(ErdiMeasurement *out) {
 ErdiStatus ErdiLRF::setLdAlwaysOn(bool enable) {
   /* Documented for the LR series and the SPD1200N series only. */
   if (_info.family != ERDI_FAMILY_A || _model == ERDI_SPD1200D03 ||
-      _model == ERDI_LRF1200A1 || _model == ERDI_LRF3000A1) {
+      _model == ERDI_LRF1200A1 || _model == ERDI_LRF3000A1 || _model == ERDI_SPD1200S2G) {
     return ERDI_ERR_UNSUPPORTED;
   }
   writeA(ERDI_FN_LD_ALWAYS_ON, 0xFF, 0xFF, 0xFF, enable ? 0x01 : 0x00);
@@ -428,7 +436,9 @@ ErdiStatus ErdiLRF::setLdAlwaysOn(bool enable) {
 }
 
 ErdiStatus ErdiLRF::setBaudB(uint32_t bps) {
-  if (_info.family != ERDI_FAMILY_B) {
+  /* LRF10VB: its manual's "Modify Baud Rate" row prints the read-serial bytes of the
+     LRF22VB/LRF50VB manuals, not a 5A 06 frame, so no baud change is offered. */
+  if (_info.family != ERDI_FAMILY_B || _model == ERDI_LRF10VB) {
     return ERDI_ERR_UNSUPPORTED;
   }
   bool known = false;

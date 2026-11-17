@@ -50,6 +50,7 @@ enum ErdiModel {
   ERDI_SPD1200N2,
   ERDI_SPD1200N4,
   ERDI_SPD1200D03,
+  ERDI_SPD1200S2G,
 
   /* Family B - 5C data frames, 460800 bps */
   ERDI_LRF50H,
@@ -60,6 +61,7 @@ enum ErdiModel {
   ERDI_LRF1500H,
   ERDI_LRF22VB,
   ERDI_LRF50VB,
+  ERDI_LRF10VB,
 
   ERDI_MODEL_COUNT
 };
