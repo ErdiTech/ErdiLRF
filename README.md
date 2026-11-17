@@ -101,11 +101,10 @@ A step-by-step wiring and first-reading walkthrough is here:
 
 ## Also available
 
-- Python driver: install the published GitHub release wheel:
-  ```bash
-  pip install https://github.com/ErdiTech/erdi-lrf-drivers/releases/download/v0.1.0/erdi_lrf-0.1.0-py3-none-any.whl
-  ```
-  See the [Python installation guide](https://github.com/ErdiTech/erdi-lrf-drivers#install-in-one-command).
+- Python driver: `pip install erdi-lrf` ([PyPI](https://pypi.org/project/erdi-lrf/),
+  [source and installation guide](https://github.com/ErdiTech/erdi-lrf-drivers#install-in-one-command)).
+- Serial debugging: the [UART frame decoder](https://erditech.github.io/lrf-uart-protocol-decoder/) shows what a module
+  is sending, in the browser or with `pip install lrf-uart-decoder`.
 - ROS 2 node: [`erdi_lrf_driver`](https://github.com/ErdiTech/erdi_lrf_driver) (builds and tests on ROS 2 Jazzy and Humble in CI).
 
 This repository is a maintained split of `arduino/ErdiLRF` from that mono-repo, published
